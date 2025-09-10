@@ -1,0 +1,21 @@
+lb-apache-prometheus-grafana/
+├─ README.md
+├─ .gitignore
+├─ docs/
+│  ├─ architecture.png         
+│  └─ troubleshooting.md      
+├─ infra/
+│  ├─ nginx/
+│  │  ├─ loadbalancer.conf     # LB proxy_pass → 8083/8084
+│  │  └─ status.conf           # stub_status (127.0.0.1:8089)
+│  ├─ apache/
+│  │  ├─ server1.conf          # vhost *:8083
+│  │  ├─ server2.conf          # vhost *:8084
+│  │  └─ status.conf           # mod_status + ExtendedStatus On
+│  ├─ systemd/
+│  │  ├─ apache_exporter.service
+│  │  └─ prometheus-nginx-exporter.override.conf  # systemd drop-in
+│  └─ prometheus/
+│     └─ prometheus.yml.snippet # scrape jobs (nginx_lb, apache_backends, node)
+└─ grafana/
+   └─ panels.md                 
